@@ -1,6 +1,6 @@
 (function() {
   window.opensettingsmenu = function(){
-    t(`
+    bot(`
     [ Settings Menu ]<br>
     > <button class="menubutton" onclick="const v = prompt('delay 1000 = 1s'); if(!isNaN(v)){settings.delaybotsend = v; reload()}">edit</button>
     `)
