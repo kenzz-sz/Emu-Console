@@ -5,7 +5,7 @@
     > <button class="menubutton" onclick="const v = prompt('delay 1000 = 1s; if(!isNaN(v)'){settings.delaybotsend = v}">Set Delay Send</button>
     `)
   }
-  function clear(){
+ window.clear = function(){
     output = "";
     reload()
   }
