@@ -1,4 +1,5 @@
 (function() {
+  t("k")
   window.opensettingsmenu = function(){
     t(`
     [ Settings Menu ]<br>
