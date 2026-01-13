@@ -1,11 +1,11 @@
 (function() {
-  t("k")
   window.opensettingsmenu = function(){
     t(`
     [ Settings Menu ]<br>
-    > <button class="menubutton" onclick="const v = prompt('delay 1000 = 1s'); if(!isNaN(v)){settings.delaybotsend = v}">Set Delay Send</button>
+    > <span>Delay Bot (</span><span id="delaybotsendtxt"></span><span>) : </span><button class="menubutton" onclick="const v = prompt('delay 1000 = 1s'); if(!isNaN(v)){settings.delaybotsend = v}">edit</button>
     `)
   }
   system("clear")
   d(200, `opensettingsmenu()`)
 })();
+  
