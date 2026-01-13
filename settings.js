@@ -6,7 +6,5 @@
     `)
   }
   system("clear")
-  d(500, `opensettingsmenu()`)
-
-
+  d(200, `opensettingsmenu()`)
 })();
