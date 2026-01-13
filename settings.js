@@ -22,7 +22,7 @@
     
     refresh();
   };
-  
+  refresh()
   system("clear");
   opensettingsmenu();
   
