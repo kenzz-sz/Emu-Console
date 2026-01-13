@@ -2,8 +2,7 @@
   window.opensettingsmenu = function(){
     t(`
     [ Settings Menu ]<br>
-    > <div id="delaybotsendtxt"></div>
-    <button class="menubutton" onclick="const v = prompt('delay 1000 = 1s'); if(!isNaN(v)){settings.delaybotsend = v; reload()}">edit</button>
+    > <button class="menubutton" onclick="const v = prompt('delay 1000 = 1s'); if(!isNaN(v)){settings.delaybotsend = v; reload()}">edit</button>
     `)
   }
   system("clear")
