@@ -1,14 +1,29 @@
 (function() {
-  window.refresh = function(){
- document.getElementById("delaybotsendtxt").innerHTML = settings.delaybotsend;
-  }
-  window.opensettingsmenu = function(){
-    bot(`
-    [ Settings Menu ]<br>
-    > <button class="menubutton" onclick="const v = prompt('delay 1000 = 1s'); if(!Number.isNaN(v)){settings.delaybotsend = v; refresh()}">edit</button>
-    `)
-  }
-  system("clear")
-  d(200, `opensettingsmenu()`)
-})();
   
+  window.refresh = function() {
+    const el = document.getElementById("delaybotsendtxt");
+    if (!el) return;
+    el.innerText = (settings.delaybotsend || 0) * 0.001;
+  };
+  
+  window.opensettingsmenu = function() {
+    bot(`
+      [ Settings Menu ]<br>
+      > Delay Bot, Current: ( <span id="delaybotsendtxt"></span>s )
+      <button class="menubutton" onclick="
+        const v = prompt('delay (detik)');
+        const n = Number(v);
+        if (!Number.isNaN(n)) {
+          settings.delaybotsend = n * 1000;
+          refresh();
+        }
+      ">edit</button>
+    `);
+    
+    refresh();
+  };
+  
+  system("clear");
+  opensettingsmenu();
+  
+})();
