@@ -1,13 +1,13 @@
 (function() {
   
   window.refresh = function() {
-    canenter = 0
     const el = document.getElementById("delaybotsendtxt");
     if (!el) return;
     el.innerText = (settings.delaybotsend || 0) * 0.001;
   };
   
   window.opensettingsmenu = function() {
+    window.canenter = 0;
     bot(`
       [ Settings Menu ]<br>
       > <button class="menubutton" onclick="system('clear'); canenter = 1">Back</button><br>
