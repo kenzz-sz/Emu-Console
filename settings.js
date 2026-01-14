@@ -1,1 +1,3 @@
-canenter = 0
+(function () {
+  
+})();
