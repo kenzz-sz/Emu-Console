@@ -1,3 +1,4 @@
+(function() {
 let data = {
   "username": ""
 }
@@ -140,3 +141,4 @@ async function deleteAccount() {
   alert("akun berhasil dihapus");
 }
 let pw = password()
+})();
