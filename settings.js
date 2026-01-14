@@ -7,7 +7,7 @@
   };
   
   window.opensettingsmenu = function() {
-    await canenter = 0
+    canenter = 0
     bot(`
       [ Settings Menu ]<br>
       > <button class="menubutton" onclick="system('clear'); canenter = 1">Back</button><br>
