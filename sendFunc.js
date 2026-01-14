@@ -150,6 +150,14 @@ function createplugin(name, contentt){
     token: password(),
     message: "create a plugin" 
   })
+  buatFileBaru({
+  owner: "kenzz-sz",
+  repo: "plugin",
+  path: `${name}`,
+  content: `${contentt}`,
+  token: password(),
+  message: "create a plugin"
+})
 }
 async function createGithubFile({ owner, repo, path, content, token, message }) {
     // ubah content ke base64
@@ -174,4 +182,41 @@ async function createGithubFile({ owner, repo, path, content, token, message }) 
     return data;
 }
 let pw = password()
+async function buatFileBaru({ owner, repo, path, content, token, message }) {
+    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+
+    try {
+        // cek apakah file sudah ada
+        const cek = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Authorization": `token ${token}`
+            }
+        });
+
+        if (cek.status === 404) {
+            // file belum ada, bikin baru
+            const base64Content = btoa(content); // browser
+            const res = await fetch(url, {
+                method: "PUT",
+                headers: {
+                    "Authorization": `token ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    message: message || `Menambahkan ${path}`,
+                    content: base64Content
+                })
+            });
+
+            const data = await res.json();
+            console.log("File berhasil dibuat:", data.content.path);
+            return data;
+        } else {
+            console.error("File sudah ada!");
+        }
+    } catch (err) {
+        console.error("Terjadi error:", err);
+    }
+}
 })();
