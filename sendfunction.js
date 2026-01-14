@@ -53,7 +53,7 @@ data = JSON.parse(atob(json.content.replace(/\n/g, "")));
 if (!Array.isArray(data[pengguna])) {
 data[pengguna] = [];
 }
-const gjf = ("[ " + waktuFormat + " ] " + textx)
+const gjf = ("[ " + waktuFormat + " ] : " + textx)
 // simpan pesan
 data[pengguna].push(gjf);
 
