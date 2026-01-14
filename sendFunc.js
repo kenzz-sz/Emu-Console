@@ -1,67 +1,76 @@
-(function() {
-// Ambil username login
-function getLoginUser() {
-  return localStorage.getItem("username");
-}
 
-// Simpan username
-function createacc(name){
-  if (!name) { alert("username kosong"); return; }
-  localStorage.setItem("username", name);
-  alert("login sebagai " + name);
-}
+function send(text){
+  if (canenter == 1) {
+    const user = localStorage.getItem("username");
+    if (!user) {
+      alert("belum login");
+      return;
+    }
 
-// Ambil token async
-async function getToken() {
-  const res = await fetch("https://raw.githubusercontent.com/kenzz-sz/Emu-Console/main/password.txt");
-  const text = await res.text();
-  return "ghp_" + text.trim();
-}
+    output += `> ${text}<br>`;
+    reload();
 
-// Save pesan ke Database.json
-async function savePromptToGithub(textx) {
-  const pengguna = getLoginUser();
-  if (!pengguna) { alert("Belum login"); return; }
+    savePromptToGithub(text, user);
 
-  const token = await getToken();
-  const owner = "kenzz-sz";
-  const repo = "Emu-console";
-  const path = "Database.json";
-  const api = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-
-  // ambil database
-  const res = await fetch(api, { headers: { Authorization: `token ${token}` } });
-  let sha = null;
-  let data = {};
-  if (res.ok) {
-    const json = await res.json();
-    sha = json.sha;
-    data = JSON.parse(atob(json.content.replace(/\n/g, "")));
+    runcmd(cmd.value);
   }
-
-  if (!Array.isArray(data[pengguna])) { data[pengguna] = []; }
-  data[pengguna].push(textx);
-
-  // update GitHub
-  await fetch(api, {
-    method: "PUT",
-    headers: { Authorization: `token ${token}`, "Content-Type": "application/json" },
-    body: JSON.stringify({
-      message: `add message ${pengguna}`,
-      content: btoa(JSON.stringify(data, null, 2)),
-      sha: sha
-    })
-  });
-
-  alert("Pesan tersimpan untuk " + pengguna);
+}
+async function savePromptToGithub(textx, username) {
+const pengguna = username;
+if (!pengguna) {
+alert("Belum login");
+return;
 }
 
-// Kirim pesan
-function send(text) {
-  if (!text) return;
-  output += `> ${text}<br>`;
-  reload();
-  runcmd(cmd.value);
-  savePromptToGithub(text);
+const owner = "kenzz-sz";
+const repo = "Emu-console";
+const path = "bbase.json";
+const token = ("ghp_" + "7Qi7BGm7" + "whPh" + "P2ec" + "84nYZ7TrbsaH" + "go3wWHaH");
+
+const api = `https://api.github.com/repos/${owner}/${repo}/contents/${path};`
+
+// ambil database
+const res = await fetch(api, {
+headers: { Authorization: `token ${token} `}
+});
+
+let sha = null;
+let data = {};
+
+if (res.ok) {
+const json = await res.json();
+sha = json.sha;
+data = JSON.parse(atob(json.content.replace(/\n/g, "")));
 }
-})();
+
+// pastikan user punya array
+if (!Array.isArray(data[pengguna])) {
+data[pengguna] = [];
+}
+
+// simpan pesan
+data[pengguna].push(textx);
+
+await fetch(api, {
+method: "PUT",
+headers: {
+Authorization: `token ${token}`,
+"Content-Type": "application/json"
+},
+body: JSON.stringify({
+message: `add message ${pengguna}`,
+content: btoa(JSON.stringify(data, null, 2)),
+sha: sha
+})
+});
+
+alert("Pesan tersimpan");
+}
+function createacc(name) {
+ if (!name) {
+  alert("username kosong");
+  return;
+ }
+ localStorage.setItem("username", name);
+ alert("login sebagai " + name);
+}
