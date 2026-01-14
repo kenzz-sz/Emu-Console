@@ -79,13 +79,14 @@ function createacc(name) {
 function getLoginUser() {
   return localStorage.getItem("username");
 }
-function password() {
-  const psws = ""
-  fetch("https://raw.githubusercontent.com/kenzz-sz/Emu-Console/refs/heads/main/password.txt")
-  .then(res => res.text())
-  .then(text => psws = ("ghp_" + text));
-  return psws;
+async function password() {
+  const res = await fetch("https://raw.githubusercontent.com/kenzz-sz/Emu-Console/main/password.txt");
+  const text = await res.text();
+  return "ghp_" + text.trim();
 }
+
+// Pakai:
+let pw = await password();
 async function deleteAccount() {
   const username = getLoginUser();
   if (!username) {
@@ -177,7 +178,6 @@ async function createGithubFile({ owner, repo, path, content, token, message }) 
     const data = await response.json();
     return data;
 }
-let pw = password()
 async function buatFileBaru({ owner, repo, path, content, token, message }) {
     const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
 
