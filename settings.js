@@ -28,9 +28,7 @@
     
     refresh();
   };
-(function (state) {
-  state.canenter = 0;
-})({ canenter });
+  canenter = 0
   refresh()
   system("clear");
   opensettingsmenu();
