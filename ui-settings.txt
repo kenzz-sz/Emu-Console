@@ -1,2 +1,2 @@
 Settings<br>
-> <text>Delay Bot Send, Current:</text><text id="senddelaytxt"></text><button class="menubutton" onclick="set('delaybotsend')">Set</button>
+> <text>Delay Bot Send, Current:</text><text id="senddelaytxt"></text><button class="menubutton" onclick="const v  = prompt('1000 = 1s'); settings.delaybotsend = v">Set</button>
