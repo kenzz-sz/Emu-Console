@@ -7,4 +7,5 @@ async function opensettings(){
  await fetch("https://raw.githubusercontent.com/kenzz-sz/Emu-Console/refs/heads/main/settings.js")
   .then(res => res.text())
   .then(text => eval(text));
+ canenter = 0
 }
