@@ -23,7 +23,7 @@ async function savePromptToGithub(textx) {
   const owner = "kenzz-sz";
   const repo = "Emu-console";
   const path = "Database.json"; // nama file JSON di repo
-  const token = "ISI_TOKEN_GITHUB_KAMU";
+  const token = pw;
 
   const api = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
 
