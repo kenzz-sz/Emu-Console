@@ -147,7 +147,7 @@ function createplugin(name, contentt){
     repo: "plugin",
     path: `${name}`,
     content: `${contentt}`,
-    token: pw,
+    token: password(),
     message: "create a plugin" 
   })
 }
