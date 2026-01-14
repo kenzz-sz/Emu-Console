@@ -1,4 +1,3 @@
-
 function send(text){
   if (canenter == 1) {
     const user = localStorage.getItem("username");
