@@ -1,4 +1,4 @@
-function send(text){
+async function send(text){
   if (canenter == 1) {
     const user = localStorage.getItem("username");
     if (!user) {
@@ -9,7 +9,7 @@ function send(text){
     output += `> ${text}<br>`;
     reload();
 
-    savePromptToGithub(text, user);
+    await savePromptToGithub(text, user);
 
     runcmd(cmd.value);
   }
@@ -32,7 +32,7 @@ const waktuFormat = `${jamStr}h:${menitStr}m:${detikStr}s ${tanggal}`
   
 const owner = "kenzz-sz";
 const repo = "Emu-console";
-const path = "database.json";
+const path = "data.json";
 const token = ("ghp_" + "7Qi7BGm7" + "whPh" + "P2ec" + "84nYZ7TrbsaH" + "go3wWHaH");
 
 const api = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`
