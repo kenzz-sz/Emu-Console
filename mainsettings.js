@@ -4,7 +4,6 @@ let settings = {
  "useentinkey": 1
 }
 async function opensettings(){
- canenter = 0
  await fetch("https://raw.githubusercontent.com/kenzz-sz/Emu-Console/refs/heads/main/settings.js")
   .then(res => res.text())
   .then(text => eval(text));
