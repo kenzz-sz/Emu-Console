@@ -79,14 +79,16 @@ function createacc(name) {
 function getLoginUser() {
   return localStorage.getItem("username");
 }
-async function password() {
-  const res = await fetch("https://raw.githubusercontent.com/kenzz-sz/Emu-Console/main/password.txt");
-  const text = await res.text();
-  return "ghp_" + text.trim();
+function password() {
+  const psws = "";
+  fetch("https://raw.githubusercontent.com/kenzz-sz/Emu-Console/refs/heads/main/password.txt")
+  .then(res => res.text())
+  .then(text => psws = text);
+  return psws
 }
 
 // Pakai:
-let pw = await password();
+let pw = password();
 async function deleteAccount() {
   const username = getLoginUser();
   if (!username) {
