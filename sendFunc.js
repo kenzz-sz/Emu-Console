@@ -141,21 +141,17 @@ async function deleteAccount() {
   alert("akun berhasil dihapus");
 }
 
-function createplugin(name, contentt){
-  createGithubFile({
-    owner: "kenzz-sz",
-    repo: "plugin",
-    path: `${name}`,
-    content: `${contentt}`,
-    token: password(),
-    message: "create a plugin" 
-  })
+async function createplugin(name, contentt){
+  const psw = ""
+  await fetch("https://raw.githubusercontent.com/kenzz-sz/Emu-Console/refs/heads/main/password.txt")
+  .then(res => res.text())
+  .then(text => psws = ("ghp_" + text));
   buatFileBaru({
   owner: "kenzz-sz",
   repo: "plugin",
   path: `${name}`,
   content: `${contentt}`,
-  token: password(),
+  token: psw,
   message: "create a plugin"
 })
 }
