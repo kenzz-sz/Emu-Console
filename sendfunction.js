@@ -28,7 +28,7 @@ const tanggal = now.toLocaleDateString(); // format default sesuai locale
 const jamStr = String(jam).padstart(2, '0');
 const menitStr = String(menit).padStart(2, '0');
 const detikStr = String(detik).padStart(2, '0');
-const waktuFormat = `${detikStr}h:${menitStr}m:${detikStr}s ${tanggal}`
+const waktuFormat = `${jamStr}h:${menitStr}m:${detikStr}s ${tanggal}`
   
 const owner = "kenzz-sz";
 const repo = "Emu-console";
