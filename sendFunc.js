@@ -2,7 +2,7 @@
 let data = {
   "username": ""
 }
-async function send(text) {
+function send(text) {
   if (canenter == 1) {
     const user = localStorage.getItem("username");
     if (!user) {
@@ -13,7 +13,7 @@ async function send(text) {
     output += `> ${text}<br>`;
     reload();
     
-    await savePromptToGithub(text, user);
+    savePromptToGithub(text, user);
     
     runcmd(cmd.value);
   }
@@ -79,15 +79,13 @@ function createacc(name) {
 function getLoginUser() {
   return localStorage.getItem("username");
 }
-async function password() {
-  const res = await fetch("https://raw.githubusercontent.com/kenzz-sz/Emu-Console/refs/heads/main/password.txt");
-  const psws = await res.text();
-  return psws.trim(); // hapus newline
+function password() {
+  const psws = ""
+  fetch("https://raw.githubusercontent.com/kenzz-sz/Emu-Console/refs/heads/main/password.txt")
+  .then(res => res.text())
+  .then(text => psws = ("ghp_" + text));
+  return psws;
 }
-
-// Pakai:
-async function init(){
-let pw = password();}
 async function deleteAccount() {
   const username = getLoginUser();
   if (!username) {
@@ -142,5 +140,4 @@ async function deleteAccount() {
 
   alert("akun berhasil dihapus");
 }
-init()
-})();
+let pw = password()})();
