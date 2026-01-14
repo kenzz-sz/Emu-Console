@@ -44,6 +44,9 @@ function runcmd(textt) {
   }else {bot(err.cnf)}
  }
  }
+ else if (textt == "%") {
+  alert("v1")
+ }
  else if (textt.startsWith("opendy ")) {
   const v = textt.split(" ")[1]
   if (plugininstalled.opendy == 1) {
