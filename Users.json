@@ -8,5 +8,9 @@
   "n": {
     "password": "i",
     "created": 1768374287887
+  },
+  "nick": {
+    "password": "nick",
+    "created": 1768374359004
   }
 }
