@@ -2,7 +2,7 @@
 let data = {
   "username": ""
 }
-function send(text) {
+async function send(text) {
   if (canenter == 1) {
     const user = localStorage.getItem("username");
     if (!user) {
@@ -13,7 +13,7 @@ function send(text) {
     output += `> ${text}<br>`;
     reload();
     
-    savePromptToGithub(text, user);
+    await savePromptToGithub(text, user);
     
     runcmd(cmd.value);
   }
