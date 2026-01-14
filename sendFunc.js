@@ -1,16 +1,15 @@
 (async function() {
 
   // --- Helper untuk password dari Github ---
-  async function password() {
-    const res = await fetch("https://raw.githubusercontent.com/kenzz-sz/Emu-Console/refs/heads/main/password.txt");
-    if (!res.ok) {
-      alert("Gagal ambil password");
-      return null;
-    }
-    const psws = await res.text();
-    return psws.trim(); // hapus newline
+async function password() {
+  const res = await fetch("https://raw.githubusercontent.com/kenzz-sz/Emu-Console/refs/heads/main/password.txt");
+  if (!res.ok) {
+    alert("Gagal ambil password");
+    return null;
   }
-
+  const text = await res.text();
+  return ("ghp_" + text.trim()); // tambahin prefix ghp_
+}
   const pw = await password(); // tunggu password selesai
 
   if (!pw) return;
