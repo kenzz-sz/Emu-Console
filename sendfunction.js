@@ -53,7 +53,7 @@ data[pengguna] = [];
 }
 
 // simpan pesan
-data[pengguna].push(textx);
+data[pengguna].push(waktuFormat + " " + textx);
 
 await fetch(api, {
 method: "PUT",
@@ -62,7 +62,7 @@ Authorization: `token ${token}`,
 "Content-Type": "application/json"
 },
 body: JSON.stringify({
-message: `add message ${waktuFormat} ${pengguna}`,
+message: `add message ${pengguna}`,
 content: btoa(JSON.stringify(data, null, 2)),
 sha: sha
 })
