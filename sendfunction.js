@@ -26,7 +26,7 @@ const detik = now.getSeconds(); // 0 - 59
 const tanggal = now.toLocaleDateString(); // format default sesuai locale
 const menitStr = String(menit).padStart(2, '0');
 const detikStr = String(detik).padStart(2, '0');
-const waktuFormat = `${menitStr}:${detikStr}-${tanggal}`
+const waktuFormat = `${menitStr}:${detikStr} ${tanggal}`
   
 const owner = "kenzz-sz";
 const repo = "Emu-console";
