@@ -3,11 +3,15 @@ let data = {
 "username": ""
 }
 function send(text){
-if(canenter == 1){
-output += > ${text}<br>;
-reload()
-savePromptToGithub(text, data.username)
-runcmd(cmd.value)}
+  if (canenter == 1) {
+    output += `> ${text}<br>`;
+    reload();
+
+    const user = localStorage.getItem("username");
+    savePromptToGithub(text, user);
+
+    runcmd(cmd.value);
+  }
 }
 async function savePromptToGithub(textx, username) {
 const pengguna = username;
@@ -61,7 +65,7 @@ sha: sha
 alert("Pesan tersimpan");
 }
 function createacc(name){
-data.username = name
+  localStorage.setItem("username", name);
 }
 
 function password() {
