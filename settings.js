@@ -27,7 +27,6 @@
       urldetector: ${plugininstalled.url.urldetector}<br>
     `);
     
-    refresh();
   };
   refresh()
   system("clear");
