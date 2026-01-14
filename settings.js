@@ -17,12 +17,12 @@
           settings.delaybotsend = n * 1000;
           refresh();
         }
-      ">edit</button><br>
+      ">edit</button><br><br>
       
-      Plugin Installed:
-      opendy: ${plugininstalled.opendy}
-      urlcmd: ${plugininstalled.urlcmd}
-      urldetector: ${plugininstalled.urldetector}
+      Plugin Installed:<br>
+      opendy: ${plugininstalled.opendy}<br>
+      urlcmd: ${plugininstalled.url.urlcmd}<br>
+      urldetector: ${plugininstalled.url.urldetector}<br>
     `);
     
     refresh();
