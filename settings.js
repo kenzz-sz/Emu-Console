@@ -1,7 +1,6 @@
 (function() {
   
   window.refresh = function() {
-    window.canenter = 0;
     const el = document.getElementById("delaybotsendtxt");
     if (!el) return;
     el.innerText = (settings.delaybotsend || 0) * 0.001;
@@ -29,6 +28,9 @@
     
     refresh();
   };
+(function (state) {
+  state.canenter = 0;
+})({ canenter });
   refresh()
   system("clear");
   opensettingsmenu();
