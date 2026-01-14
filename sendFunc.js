@@ -1,3 +1,4 @@
+(function() {
 // Ambil username login
 function getLoginUser() {
   return localStorage.getItem("username");
@@ -58,5 +59,9 @@ async function savePromptToGithub(textx) {
 // Kirim pesan
 function send(text) {
   if (!text) return;
+  output += `> ${text}<br>`;
+  reload();
+  runcmd(cmd.value);
   savePromptToGithub(text);
 }
+})();
