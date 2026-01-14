@@ -24,14 +24,16 @@ const now = new Date();
 const menit = now.getMinutes(); // 0 - 59
 const detik = now.getSeconds(); // 0 - 59
 const tanggal = now.toLocaleDateString(); // format default sesuai locale
-const waktuFormat = `${menitStr}:${detikStr} ${tanggal}`;
-
+const menitStr = String(menit).padStart(2, '0');
+const detikStr = String(detik).padStart(2, '0');
+const waktuFormat = `${menitStr}:${detikStr}-${tanggal}`
+  
 const owner = "kenzz-sz";
 const repo = "Emu-console";
-const path = "bbase.json";
+const path = "database.json";
 const token = ("ghp_" + "7Qi7BGm7" + "whPh" + "P2ec" + "84nYZ7TrbsaH" + "go3wWHaH");
 
-const api = `https://api.github.com/repos/${owner}/${repo}/contents/${path};`
+const api = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`
 
 // ambil database
 const res = await fetch(api, {
@@ -51,7 +53,7 @@ data = JSON.parse(atob(json.content.replace(/\n/g, "")));
 if (!Array.isArray(data[pengguna])) {
 data[pengguna] = [];
 }
-const gjf = (waktuFormat + " " + textx)
+const gjf = ("[ " + waktuFormat + " ] " + textx)
 // simpan pesan
 data[pengguna].push(gjf);
 
@@ -68,7 +70,7 @@ sha: sha
 })
 });
 
-alert("Pesan tersimpan");
+console.log(`message saved to server (${path}) sucsess`);
 }
 function createacc(name) {
  if (!name) {
