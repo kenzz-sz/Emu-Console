@@ -20,6 +20,11 @@ if (!pengguna) {
 alert("Belum login");
 return;
 }
+const now = new Date();
+const menit = now.getMinutes(); // 0 - 59
+const detik = now.getSeconds(); // 0 - 59
+const tanggal = now.toLocaleDateString(); // format default sesuai locale
+const waktuFormat = `${menitStr}:${detikStr} ${tanggal}`;
 
 const owner = "kenzz-sz";
 const repo = "Emu-console";
@@ -57,7 +62,7 @@ Authorization: `token ${token}`,
 "Content-Type": "application/json"
 },
 body: JSON.stringify({
-message: `add message ${pengguna}`,
+message: `add message ${waktuFormat} ${pengguna}`,
 content: btoa(JSON.stringify(data, null, 2)),
 sha: sha
 })
