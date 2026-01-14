@@ -1,17 +1,82 @@
 (async function() {
 
   // --- Helper untuk password dari Github ---
-async function password() {
-  const res = await fetch("https://raw.githubusercontent.com/kenzz-sz/Emu-Console/refs/heads/main/password.txt");
-  if (!res.ok) {
-    alert("Gagal ambil password");
-    return null;
+  // --- 1. Perbaikan Fungsi Password ---
+  async function password() {
+    try {
+      const res = await fetch("https://raw.githubusercontent.com/kenzz-sz/Emu-Console/main/password.txt");
+      if (!res.ok) throw new Error("Gagal ambil password");
+      const text = await res.text();
+      // Tips: Jangan simpan token di repo publik, GitHub akan otomatis me-revoke/mematikan token tersebut.
+      return "ghp_" + text.trim(); 
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
   }
-  const text = await res.text();
-  return ("ghp_" + text.trim()); // tambahin prefix ghp_
-}
-  const pw = await password(); // tunggu password selesai
 
+  const pw = await password();
+  if (!pw) return;
+
+  // --- 2. Perbaikan Fungsi Simpan (Encoding & SHA) ---
+  async function savePromptToGithub(textx, username) {
+    const owner = "kenzz-sz";
+    const repo = "Emu-console";
+    const path = "Database.json";
+    const token = pw;
+    const api = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+
+    try {
+      // Ambil file terbaru untuk mendapatkan SHA yang valid
+      let res = await fetch(api, { 
+        headers: { Authorization: `token ${token}`, "Cache-Control": "no-cache" } 
+      });
+      
+      let sha = null;
+      let data = {};
+
+      if (res.ok) {
+        const json = await res.json();
+        sha = json.sha;
+        // Gunakan decode UTF-8 yang aman untuk karakter spesial/emoji
+        data = JSON.parse(decodeURIComponent(escape(atob(json.content.replace(/\s/g, '')))));
+      }
+
+      // Tambahkan pesan ke array user
+      if (!Array.isArray(data[username])) data[username] = [];
+      data[username].push(textx);
+
+      // Encode kembali ke Base64 (Aman untuk Unicode/Emoji)
+      const updatedContent = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+
+      // Kirim Update ke GitHub
+      const updateRes = await fetch(api, {
+        method: "PUT",
+        headers: {
+          Authorization: `token ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          message: `Update database by ${username}`,
+          content: updatedContent,
+          sha: sha // SHA sangat penting agar tidak error 409
+        })
+      });
+
+      if (updateRes.ok) {
+        console.log("✅ Berhasil simpan ke Database.json");
+      } else {
+        const errorData = await updateRes.json();
+        console.error("❌ Gagal simpan:", errorData.message);
+      }
+    } catch (err) {
+      console.error("❌ Error:", err);
+    }
+  }
+
+  // Fungsi lainnya (createacc, send, dll) tetap sama...
+  // Pastikan fungsi send() memanggil savePromptToGithub dengan benar.
+  window.savePromptToGithub = savePromptToGithub;
   if (!pw) return;
 
   // --- Fungsi login / buat akun ---
@@ -26,60 +91,6 @@ async function password() {
 
   function getLoginUser() {
     return localStorage.getItem("username");
-  }
-
-  // --- Fungsi kirim pesan ke Database.json ---
-  async function savePromptToGithub(textx, username) {
-    if (!username) {
-      alert("Belum login");
-      return;
-    }
-
-    const owner = "kenzz-sz";
-    const repo = "Emu-console";
-    const path = "Database.json";
-    const token = pw;
-
-    const api = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-
-    // ambil database
-    let res = await fetch(api, { headers: { Authorization: `token ${token}` } });
-    let sha = null;
-    let data = {};
-
-    if (res.ok) {
-      const json = await res.json();
-      sha = json.sha;
-      data = JSON.parse(atob(json.content.trim()));
-    }
-
-    // pastikan user punya array
-    if (!Array.isArray(data[username])) {
-      data[username] = [];
-    }
-
-    // simpan pesan
-    data[username].push(textx);
-
-    // update database
-    res = await fetch(api, {
-      method: "PUT",
-      headers: {
-        Authorization: `token ${token}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        message: `add message ${username}`,
-        content: btoa(JSON.stringify(data, null, 2)),
-        sha: sha
-      })
-    });
-
-    if (res.ok) {
-      console.log("Message saved to Database.json");
-    } else {
-      console.error("Gagal simpan message:", await res.text());
-    }
   }
 
   // --- Fungsi send pesan ---
