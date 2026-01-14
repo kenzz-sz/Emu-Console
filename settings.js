@@ -28,9 +28,8 @@
     
     refresh();
   };
-  canenter = 0
   refresh()
   system("clear");
   opensettingsmenu();
-  
+  window.canenter = 0
 })();
