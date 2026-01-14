@@ -77,6 +77,17 @@ function runcmd(textt) {
  else if (textt == "settings") {
  d(1000, 'opensettings()')
  }
+ else if (textt.startsWith("create-plugin ")) {
+ const nameplugin = textt.split(" ")[1]
+ const contentsc = textt.split(" ")[2]
+ if(textt.endsWith(" -url")){
+ fetch(contentsc)
+  .then(r => r.text())
+  .then(text => createplugin(nameplugin, text));}
+ else{
+  createplugin(nameplugin, contentsc)
+ }
+  }
  else {
   bot(err.cnf)
   reload()

@@ -140,5 +140,38 @@ async function deleteAccount() {
 
   alert("akun berhasil dihapus");
 }
+
+function createplugin(name, contentt){
+  createGithubFile({
+    owner: "kenzz-sz",
+    repo: "Emu-console",
+    path: `plugin/${name}`,
+    content: `${contentt}`,
+    token: pw,
+    message: "create a plugin" 
+  })
+}
+async function createGithubFile({ owner, repo, path, content, token, message }) {
+    // ubah content ke base64
+    const base64Content = btoa(content); // di browser
+    // kalau di Node.js pakai: Buffer.from(content).toString("base64");
+
+    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+
+    const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+            "Authorization": `token ${token}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            message: message || `Add ${path}`,
+            content: base64Content
+        })
+    });
+
+    const data = await response.json();
+    return data;
+}
 let pw = password()
 })();
