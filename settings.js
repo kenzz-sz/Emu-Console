@@ -7,6 +7,7 @@
   };
   
   window.opensettingsmenu = function() {
+    canenter = 0
     bot(`
       [ Settings Menu ]<br>
       > <button class="menubutton" onclick="system('clear'); canenter = 1">Back</button><br>
@@ -31,5 +32,4 @@
   refresh()
   system("clear");
   opensettingsmenu();
-  window.canenter = 0
 })();
