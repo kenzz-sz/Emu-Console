@@ -32,7 +32,7 @@ const waktuFormat = `${jamStr}h:${menitStr}m:${detikStr}s ${tanggal}`
   
 const owner = "kenzz-sz";
 const repo = "Emu-console";
-const path = "data.json";
+const path = "database.json";
 const token = ("ghp_" + "7Qi7BGm7" + "whPh" + "P2ec" + "84nYZ7TrbsaH" + "go3wWHaH");
 
 const api = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`
