@@ -144,8 +144,8 @@ async function deleteAccount() {
 function createplugin(name, contentt){
   createGithubFile({
     owner: "kenzz-sz",
-    repo: "Emu-console",
-    path: `plugin/${name}`,
+    repo: "plugin",
+    path: `${name}`,
     content: `${contentt}`,
     token: pw,
     message: "create a plugin" 
