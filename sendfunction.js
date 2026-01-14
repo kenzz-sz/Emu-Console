@@ -68,9 +68,8 @@ message: `add message ${pengguna}`,
 content: btoa(JSON.stringify(data, null, 2)),
 sha: sha
 })
-});
-
 console.log(`message saved to server (${path}) sucsess`);
+});
 }
 function createacc(name) {
  if (!name) {
