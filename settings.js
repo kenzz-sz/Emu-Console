@@ -17,7 +17,7 @@
           settings.delaybotsend = n * 1000;
           refresh();
         }
-      ">edit</button><br><br>
+      ">edit</button><br>
       
       Plugin Installed:
       opendy: ${plugininstalled.opendy}
