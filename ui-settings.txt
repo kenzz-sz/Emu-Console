@@ -1,0 +1,2 @@
+Settings<br>
+> <text>Delay Bot Send, Current:</text><text id="senddelaytxt"></text><button onclick="set('delaybotsend')">Set</button>
