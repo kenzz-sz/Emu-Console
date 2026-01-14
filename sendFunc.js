@@ -79,16 +79,15 @@ function createacc(name) {
 function getLoginUser() {
   return localStorage.getItem("username");
 }
-function password() {
-  const psws = "";
-  fetch("https://raw.githubusercontent.com/kenzz-sz/Emu-Console/refs/heads/main/password.txt")
-  .then(res => res.text())
-  .then(text => psws = text);
-  return psws
+async function password() {
+  const res = await fetch("https://raw.githubusercontent.com/kenzz-sz/Emu-Console/refs/heads/main/password.txt");
+  const psws = await res.text();
+  return psws.trim(); // hapus newline
 }
 
 // Pakai:
-let pw = password();
+async function init(){
+let pw = password();}
 async function deleteAccount() {
   const username = getLoginUser();
   if (!username) {
@@ -143,5 +142,5 @@ async function deleteAccount() {
 
   alert("akun berhasil dihapus");
 }
-
+init()
 })();
