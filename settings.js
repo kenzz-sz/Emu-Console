@@ -1,4 +1,4 @@
-(function () {
+(async function () {
 
 const datatxtemu = {
 "ui": ""
